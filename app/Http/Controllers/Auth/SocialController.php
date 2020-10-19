@@ -19,7 +19,7 @@ class SocialController extends Controller
      */
     public function redirectToProvider(string $provider): RedirectResponse
     {
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver($provider)->redirect();
     }
     /**
      * Undocumented function
@@ -30,7 +30,7 @@ class SocialController extends Controller
     public function handleProviderCallback(string $provider): RedirectResponse
     {
         try {
-            $data = Socialite::driver('facebook')->user();
+            $data = Socialite::driver($provider)->user();
             return $this->handleUser($data, $provider);
         } catch (\Exception $e) {
             return redirect(route('login'))->with('status', 'Facebook Login failed');
@@ -61,7 +61,7 @@ class SocialController extends Controller
         if (!$user) {
             return $this->createUser($data, $provider);
         }
-        $user->social->facebook->token = $data->token;
+        $user->social->{$provider}->token = $data->token;
         $user->save();
         return $this->login($user);
     }

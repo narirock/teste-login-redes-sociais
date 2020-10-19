@@ -49,6 +49,7 @@
 
                 <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                     <a href="{{ route('social.login', 'facebook') }}" class="btn btn-primary text-center">Login com Facebook</a>
+                    <a href="{{ route('social.login', 'google') }}" class="btn btn-danger text-center">Login com Google</a>
                 </div>
 
             </div>
